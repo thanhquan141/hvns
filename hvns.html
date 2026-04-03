@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học Viện Bóng Đá Nam Sơn</title>
+    
+    <link rel="icon" type="image/jpeg" href="ảnh logo.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+
+        :root {
+            --color-red: #ed1c24;
+            --color-navy: #002d72;
+            --color-gold: #f1c40f;
+            --color-white: #ffffff;
+            --color-dark: #1a1a1a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1, h2, h3, h4, .nav-link {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+        }
+
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        .checkbox-custom:checked + label {
+            background-color: var(--color-red);
+            color: white;
+            border-color: var(--color-red);
+            transform: scale(1.05);
+        }
+
+        .checkbox-custom:disabled + label {
+            background-color: #f3f4f6;
+            color: #d1d5db;
+            border-color: #e5e7eb;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .radio-custom:checked + label {
+            background-color: var(--color-red);
+            color: white;
+            border-color: var(--color-red);
+            box-shadow: 0 4px 12px rgba(237, 28, 36, 0.3);
+        }
+
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        .zalo-bubble {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            width: 60px;
+            height: 60px;
+            background: #0084ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            animation: pulse-zalo 2s infinite;
+        }
+        
+        @keyframes pulse-zalo {
+            0% { box-shadow: 0 0 0 0 rgba(0, 132, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 132, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 132, 255, 0); }
+        }
+
+        .timeline-container {
+            position: relative;
+            padding: 2rem 0;
+        }
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--color-navy), var(--color-red));
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .timeline-content {
+            width: 45%;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        .timeline-content:hover {
+            transform: translateY(-5px);
+        }
+        .timeline-icon {
+            position: absolute;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border: 4px solid var(--color-navy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transform: translateX(-50%);
+        }
+        @media (max-width: 768px) {
+            .timeline-line { left: 30px; }
+            .timeline-icon { left: 30px; transform: none; }
+            .timeline-content { width: calc(100% - 80px); margin-left: 80px; }
+            .timeline-item { justify-content: flex-start; }
+        }
+
+        .location-card:hover .location-overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <a href="https://zalo.me/0869426975" target="_blank" class="zalo-bubble">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo" class="w-8 h-8">
+    </a>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white shadow-md border-b-4 border-red-600">
+        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <img src="ảnh logo.jpg" alt="NAM SƠN" class="h-14 w-auto rounded" onerror="this.src='https://placehold.co/60x60/ed1c24/ffffff?text=NS'">
+                <div>
+                    <span class="text-lg font-bold block leading-none text-red-600">HỌC VIỆN BÓNG ĐÁ</span>
+                    <span class="text-xl font-black block leading-none text-gray-900">NAM SƠN</span>
+                </div>
+            </div>
+            <div class="hidden lg:flex space-x-6">
+                <a href="#home" class="nav-link font-bold hover:text-red-600">Trang Chủ</a>
+                <a href="#journey" class="nav-link font-bold hover:text-red-600">Hành Trình</a>
+                <a href="#pricing" class="nav-link font-bold hover:text-red-600">Học Phí</a>
+                
+                <a href="#location" class="nav-link font-bold hover:text-red-600">Địa Điểm</a>
+                <a href="#enroll" class="nav-link font-bold hover:text-red-600">Đăng Ký</a>
+            </div>
+            <div class="flex items-center space-x-2 border-l pl-4">
+                <img src="Logo_CLB_CATPHCM.png" alt="CATP" class="h-10 w-auto">
+                 <div>
+                    <span class="text-xs font-bold block leading-none text-red-600 uppercase">Đối tác chiến lược</span>
+                    <span class="text-sm font-black block leading-none text-gray-900 uppercase">CLB CÔNG AN TP HCM</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="hero-section flex items-center justify-center text-center text-white">
+        <div class="max-w-4xl px-4 mt-20">
+            <div class="bg-black/40 backdrop-blur-sm p-8 rounded-3xl inline-block">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 uppercase italic">
+                    <span class="text-yellow-400">HỌC VIỆN BÓNG ĐÁ NAM SƠN</span>
+                </h1>
+                <p class="text-lg mb-8 opacity-90 italic uppercase font-bold tracking-widest">Nền tảng vững chắc - Tương lai vươn xa</p>
+                <a href="#enroll" class="inline-block bg-red-600 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-red-700 transition transform hover:scale-105 shadow-xl">GIA NHẬP NGAY</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hành Trình Hợp Tác -->
+    <section id="journey" class="py-20 bg-white overflow-hidden border-b">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-black italic uppercase mb-2">Hành trình <span class="text-red-600">Hợp tác</span></h2>
+                <p class="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Sự kết hợp giữa Nam Sơn & CLB Công An TP.HCM</p>
+            </div>
+
+            <div class="timeline-container max-w-5xl mx-auto">
+                <div class="timeline-line"></div>
+                <div class="timeline-item">
+                    <div class="timeline-icon" style="border-color: var(--color-navy);">
+                        <i class="fas fa-handshake text-blue-900"></i>
+                    </div>
+                    <div class="timeline-content md:mr-auto md:ml-0 ml-auto mr-0 text-right md:text-right text-left">
+                        <span class="text-xs font-black text-blue-900 bg-blue-50 px-3 py-1 rounded-full uppercase italic">Giai đoạn 1</span>
+                        <h4 class="text-lg font-black mt-2 uppercase text-gray-800">Ký kết chiến lược</h4>
+                        <p class="text-sm text-gray-500 mt-2 italic leading-relaxed">Học Viện Bóng Đá Nam Sơn chính thức trở thành đối tác đào tạo trẻ cho hệ thống CLB Công An TP.HCM.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon" style="border-color: var(--color-red);">
+                        <i class="fas fa-futbol text-red-600"></i>
+                    </div>
+                    <div class="timeline-content md:ml-auto md:mr-0 ml-auto mr-0">
+                        <span class="text-xs font-black text-red-600 bg-red-50 px-3 py-1 rounded-full uppercase italic">Giai đoạn 2</span>
+                        <h4 class="text-lg font-black mt-2 uppercase text-gray-800">Chuẩn hóa giáo án</h4>
+                        <p class="text-sm text-gray-500 mt-2 italic leading-relaxed">Áp dụng mô hình huấn luyện chuyên nghiệp từ CLB Công An TP.HCM vào học viện.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon" style="border-color: var(--color-navy);">
+                        <i class="fas fa-trophy text-blue-900"></i>
+                    </div>
+                    <div class="timeline-content md:mr-auto md:ml-0 ml-auto mr-0 text-right md:text-right text-left">
+                        <span class="text-xs font-black text-blue-900 bg-blue-50 px-3 py-1 rounded-full uppercase italic">Giai đoạn 3</span>
+                        <h4 class="text-lg font-black mt-2 uppercase text-gray-800">Tuyển chọn tài năng</h4>
+                        <p class="text-sm text-gray-500 mt-2 italic leading-relaxed">Học viên xuất sắc có cơ hội tiến cử trực tiếp vào các đội trẻ U9-U11-U13-U15 CLB Công An TP.HCMP.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Học Phí & Ưu Đãi -->
+    <section id="pricing" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-black italic uppercase mb-2">Bảng học phí <span class="text-red-600">Niêm yết</span></h2>
+            <div class="inline-block bg-red-100 text-red-700 px-6 py-2 rounded-full font-black italic uppercase text-xs mb-12 shadow-sm border border-red-200">
+                ⚠️ Qui định: Học viên mới đăng ký lần đầu đóng tối thiểu 1 khóa (2 tháng)
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 max-w-7xl mx-auto mb-16">
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-green-500 relative overflow-hidden">
+                    <p class="text-[12px] font-bold text-gray-400 uppercase">SÂN 5 CƠ BẢN</p>
+                    <p class="text-2xl font-black mt-1">400.000đ</p>
+                    <p class="text-[14px] text-gray-400">tháng (4 buổi)</p>
+                    <div class="mt-4 pt-4 border-t border-dashed">
+                        <p class="text-[14px] font-bold text-red-600 italic">Khóa 2 tháng 800.000đ</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-red-500">
+                    <p class="text-[12px] font-bold text-gray-400 uppercase">SÂN 5 NÂNG CAO</p>
+                    <p class="text-2xl font-black mt-1">650.000đ</p>
+                    <p class="text-[14px] text-gray-400">tháng (8 buổi)</p>
+                    <div class="mt-4 pt-4 border-t border-dashed">
+                        <p class="text-[14px] font-bold text-red-600 italic">Khóa 2 tháng: 1.300.000đ</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-blue-500">
+                    <p class="text-[12px] font-bold text-gray-400 uppercase">SÂN 7 CƠ BẢN</p>
+                    <p class="text-2xl font-black mt-1">520.000đ</p>
+                    <p class="text-[14px] text-gray-400">tháng (4 buổi)</p>
+                    <div class="mt-4 pt-4 border-t border-dashed">
+                        <p class="text-[14px] font-bold text-red-600 italic">Khóa 2 tháng: 1.040.000đ</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-orange-500">
+                    <p class="text-[12px] font-bold text-gray-400 uppercase">SÂN 7 NÂNG CAO</p>
+                    <p class="text-2xl font-black mt-1">850.000đ</p>
+                    <p class="text-[14px] text-gray-400">tháng (8 buổi)</p>
+                    <div class="mt-4 pt-4 border-t border-dashed">
+                        <p class="text-[14px] font-bold text-red-600 italic">Khóa 2 tháng: 1.700.000đ</p>
+                    </div>
+                </div>
+                <div class="bg-gray-900 p-6 rounded-xl shadow-sm border-t-4 border-yellow-500 text-white">
+                    <p class="text-[12px] font-bold text-yellow-500 uppercase">NĂNG KHIẾU</p>
+                    <p class="text-2xl font-black mt-1">1.500.000đ</p>
+                    <p class="text-[14px] text-gray-500 italic">tháng (12 buổi)</p>
+                    <div class="mt-4 pt-4 border-t border-dashed border-gray-700">
+                        <p class="text-[14px] font-bold text-yellow-500 italic">Khóa 2 tháng: 3.000.000đ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Địa điểm & Liên hệ -->
+    <section id="location" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <div class="inline-block px-4 py-2 bg-red-600 text-white rounded-lg font-bold text-xs uppercase italic tracking-widest shadow-lg mb-4">Mạng lưới đào tạo</div>
+                <h2 class="text-4xl font-black uppercase italic leading-tight">Cơ sở <span class="text-red-600">Tập luyện</span></h2>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <!-- Cơ sở 1 -->
+                <div class="bg-gray-50 rounded-[2.5rem] p-8 border border-gray-100 shadow-xl flex flex-col h-full transition transform hover:scale-[1.02]">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-red-600 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg mr-4">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-black text-xl uppercase italic leading-tight">Cơ sở chính</h3>
+                            <p class="text-xs font-bold text-red-600 uppercase">Quận 10 - TP.HCM</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 flex-grow mb-8">
+                        <div>
+                            <p class="text-gray-900 font-bold text-lg leading-snug">137 Bắc Hải, P. Hòa Hưng, Quận 10, TP.HCM</p>
+                            <p class="text-gray-500 text-xs italic font-bold uppercase mt-1">(Sân bóng đá B7C13)</p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-200">
+                            <p class="text-xs text-gray-500 uppercase font-black italic"><i class="fas fa-info-circle mr-2"></i>Thông tin:</p>
+                            <p class="text-sm text-gray-600 mt-1">Văn phòng ghi danh chính. Có các lớp học vào lúc T7 CN sân 5.</p>
+                        </div>
+                    </div>
+                    <div class="rounded-3xl overflow-hidden shadow-inner h-64 border-2 border-white">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.467406859577!2d106.6622831746535!3d10.775466859210086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752edca2608447%3A0x6b6311681284a1e9!2zMTM3IELhuq9jIEjhuqNpLCBQaMaw4budbmcgMTUsIFF14bqtbiAxMCwgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1714570000000!5m2!1svi!2s" 
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <!-- Cơ sở 2 -->
+                <div class="bg-gray-50 rounded-[2.5rem] p-8 border border-gray-100 shadow-xl flex flex-col h-full transition transform hover:scale-[1.02]">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-blue-900 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg mr-4">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-black text-xl uppercase italic leading-tight">Cơ sở khác</h3>
+                            <p class="text-xs font-bold text-blue-900 uppercase">Quận 11 - TP.HCM</p>
+                        </div>
+                    </div>
+                    <div class="space-y-4 flex-grow mb-8">
+                        <div>
+                            <p class="text-gray-900 font-bold text-lg leading-snug">219 Lý Thường Kiệt, P. Diên Hồng, TP.HCM</p>
+                            <p class="text-gray-500 text-xs italic font-bold uppercase mt-1">(Sân bóng đá LYON)</p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-200">
+                            <p class="text-xs text-gray-500 uppercase font-black italic"><i class="fas fa-info-circle mr-2"></i>Thông tin:</p>
+                            <p class="text-sm text-gray-600 mt-1">Cơ sở tập luyện mới mở rộng . Có các lớp học từ T2 - CN sân 5 và sân 7. Phù hợp cho học viên khu vực Q11, Q5, Tân Bình.</p>
+                        </div>
+                    </div>
+                    <div class="rounded-3xl overflow-hidden shadow-inner h-64 border-2 border-white">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.646589333907!2d106.65604137465335!3d10.761706859458928!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752eef8e053fcf%3A0xf650f92275681640!2zMjE5IEzDvSBUaMaw4budbmcgS2nhu4d0LCBQaMaw4budbmcgMTUsIFF14bqtbiAxMSwgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1714570100000!5m2!1svi!2s" 
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hotline chung -->
+            <div class="mt-12 max-w-2xl mx-auto bg-gray-900 text-white p-6 rounded-3xl flex flex-col md:row items-center justify-between shadow-2xl">
+                <div class="text-center md:text-left mb-4 md:mb-0">
+                    <p class="text-[10px] text-gray-400 font-black uppercase tracking-widest">Hotline tư vấn chung</p>
+                    <p class="text-2xl font-black text-red-500 uppercase">0869 426 975</p>
+                </div>
+                <a href="tel:0869426975" class="bg-red-600 hover:bg-red-700 text-white font-black px-8 py-3 rounded-xl transition uppercase text-sm italic">
+                    Gọi ngay <i class="fas fa-phone-alt ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Đăng Ký -->
+    <section id="enroll" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl border border-gray-100">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-black uppercase italic">Đăng ký <span class="text-red-600">Ghi danh</span></h2>
+                    <p class="text-gray-400 text-[10px] mt-2 font-bold uppercase tracking-widest italic">* Hệ thống sẽ tính học phí theo chu kỳ khóa 2 tháng cho học viên mới</p>
+                </div>
+                
+                <form id="footballForm" class="space-y-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <input type="text" id="parentName" placeholder="Họ tên phụ huynh *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm" required>
+                        <input type="tel" id="phoneNumber" placeholder="Số điện thoại Zalo *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm" required>
+                        <input type="text" id="studentName" placeholder="Họ tên học viên *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm" required>
+                        <input type="number" id="birthYear" placeholder="Năm sinh của bé *" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm" required>
+                    </div>
+
+                    <div class="space-y-4">
+                        <p class="text-xs font-black uppercase text-gray-500 italic flex items-center">
+                            <span class="bg-red-600 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] mr-2">1</span>
+                            Chọn cơ sở tập luyện:
+                        </p>
+                        <select id="locationSelect" class="w-full px-5 py-4 rounded-xl border outline-none focus:border-red-600 transition shadow-sm font-bold text-sm bg-white cursor-pointer">
+                            <option value="B7C13">Cơ sở 1: Sân B7C13 (Bắc Hải, Quận 10)</option>
+                            <option value="LYON">Cơ sở 2: Sân LYON (Lý Thường Kiệt, Quận 11)</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-4">
+                        <p class="text-xs font-black uppercase text-gray-500 italic flex items-center">
+                            <span class="bg-red-600 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] mr-2">2</span>
+                            Chọn mô hình sân tập:
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <input type="radio" id="pitch5" name="pitchType" value="5" class="hidden radio-custom pitch-radio" checked>
+                                <label for="pitch5" class="block w-full text-center py-4 border-2 rounded-xl cursor-pointer font-bold transition hover:bg-white uppercase text-xs">
+                                    <i class="fas fa-th mr-2"></i> Lớp Sân 5
+                                </label>
+                            </div>
+                            <div>
+                                <input type="radio" id="pitch7" name="pitchType" value="7" class="hidden radio-custom pitch-radio">
+                                <label for="pitch7" class="block w-full text-center py-4 border-2 rounded-xl cursor-pointer font-bold transition hover:bg-white uppercase text-xs">
+                                    <i class="fas fa-border-all mr-2"></i> Lớp Sân 7
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <p class="text-xs font-black uppercase text-gray-500 italic flex items-center">
+                            <span class="bg-red-600 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] mr-2">3</span>
+                            Chọn các buổi tập mong muốn:
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <input type="checkbox" id="t2" value="Thứ 2" class="hidden checkbox-custom schedule-check"><label for="t2" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs uppercase transition shadow-sm">T2</label>
+                            <input type="checkbox" id="t3" value="Thứ 3" class="hidden checkbox-custom schedule-check"><label for="t3" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs uppercase transition shadow-sm">T3</label>
+                            <input type="checkbox" id="t4" value="Thứ 4" class="hidden checkbox-custom schedule-check"><label for="t4" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs uppercase transition shadow-sm">T4</label>
+                            <input type="checkbox" id="t5" value="Thứ 5" class="hidden checkbox-custom schedule-check"><label for="t5" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs uppercase transition shadow-sm">T5</label>
+                            <input type="checkbox" id="t6" value="Thứ 6" class="hidden checkbox-custom schedule-check"><label for="t6" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs uppercase transition shadow-sm">T6</label>
+                            <input type="checkbox" id="t7" value="Thứ 7" class="hidden checkbox-custom schedule-check"><label for="t7" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs uppercase transition shadow-sm">T7</label>
+                            <input type="checkbox" id="cn" value="Chủ Nhật" class="hidden checkbox-custom schedule-check"><label for="cn" class="px-5 py-3 border rounded-lg cursor-pointer font-bold text-xs uppercase transition shadow-sm">CN</label>
+                        </div>
+                        <div id="notice-box" class="bg-blue-50 p-3 rounded-lg border border-blue-100 hidden text-[10px] text-blue-600 font-bold uppercase italic"></div>
+                    </div>
+
+                    <div class="bg-gray-900 p-8 rounded-3xl text-white flex flex-col md:row justify-between items-center gap-6 relative overflow-hidden">
+                        <div class="z-10 text-center md:text-left">
+                            <p class="text-[10px] text-yellow-400 font-bold uppercase tracking-widest mb-1">Dự toán học phí khóa đầu (2 tháng)</p>
+                            <p id="calc-label" class="text-sm text-gray-400 italic">Vui lòng chọn đầy đủ thông tin bên trên...</p>
+                        </div>
+                        <div class="z-10 text-center md:text-right">
+                             <div class="text-4xl font-black text-red-500" id="totalTuition">0đ</div>
+                             <p class="text-[9px] text-gray-500 uppercase mt-1">Học viên mới đóng tối thiểu 2 tháng</p>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-red-600 text-white font-black py-5 rounded-2xl text-lg uppercase shadow-xl hover:bg-red-700 transition transform hover:-translate-y-1">Gửi Đăng Ký Tư Vấn</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-950 text-white py-16 border-t-4 border-red-600">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-8 mb-12">
+                <div class="flex items-center space-x-3">
+                    <img src="ảnh logo.jpg" alt="NAM SƠN" class="h-10 w-auto rounded border border-gray-800">
+                    <span class="text-sm font-black italic uppercase tracking-widest">HỌC VIỆN BÓNG ĐÁ NAM SƠN </span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <img src="Logo_CLB_CATPHCM.png" alt="CATP" class="h-10 w-auto">
+                    <span class="text-sm font-black italic uppercase tracking-widest text-gray-500">CLB CÔNG AN TP HCM</span>
+                </div>
+            </div>
+            <p class="text-[10px] font-bold uppercase tracking-[0.3em] opacity-30">© 2026 HỌC VIỆN BÓNG ĐÁ NAM SƠN. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const pitchRadios = document.querySelectorAll('.pitch-radio');
+        const checkboxes = document.querySelectorAll('.schedule-check');
+        const totalDisplay = document.getElementById('totalTuition');
+        const calcLabel = document.getElementById('calc-label');
+        const noticeBox = document.getElementById('notice-box');
+
+        const days = {
+            t2: document.getElementById('t2'),
+            t3: document.getElementById('t3'),
+            t4: document.getElementById('t4'),
+            t5: document.getElementById('t5'),
+            t6: document.getElementById('t6'),
+            t7: document.getElementById('t7'),
+            cn: document.getElementById('cn')
+        };
+
+        function updateLogic() {
+            let pitchType = "5";
+            pitchRadios.forEach(radio => { if(radio.checked) pitchType = radio.value; });
+
+            Object.values(days).forEach(cb => cb.disabled = false);
+            noticeBox.classList.add('hidden');
+
+            if (pitchType === "7") {
+                [days.t2, days.t3, days.t4, days.t5, days.t6].forEach(cb => {
+                    cb.checked = false;
+                    cb.disabled = true;
+                });
+                noticeBox.classList.remove('hidden');
+                noticeBox.innerText = "* Sân 7 hiện chỉ mở lớp vào Thứ 7 & Chủ Nhật.";
+            } else if (pitchType === "5") {
+                days.t6.checked = false;
+                days.t6.disabled = true;
+                noticeBox.classList.remove('hidden');
+                noticeBox.innerText = "* Sân 5 không tổ chức các lớp vào Thứ 6.";
+            }
+            calculateTuition(pitchType);
+        }
+
+        function calculateTuition(pitchType) {
+            let count = 0;
+            checkboxes.forEach(cb => { if(cb.checked) count++; });
+            
+            let monthlyTotal = 0;
+            let label = "";
+
+            if (count === 0) {
+                monthlyTotal = 0;
+                label = "Vui lòng chọn ít nhất 1 buổi tập...";
+            } else if (count >= 3) {
+                monthlyTotal = 1500000;
+                label = "Năng Khiếu (3+ buổi/tuần)";
+            } else if (pitchType === "5") {
+                if (count === 1) { monthlyTotal = 400000; label = "Sân 5 Cơ Bản (1 buổi/tuần)"; }
+                else if (count === 2) { monthlyTotal = 650000; label = "Sân 5 Nâng Cao (2 buổi/tuần)"; }
+            } else if (pitchType === "7") {
+                if (count === 1) { monthlyTotal = 520000; label = "Sân 7 Cơ Bản (1 buổi/tuần)"; }
+                else if (count === 2) { monthlyTotal = 850000; label = "Sân 7 Nâng Cao (2 buổi/tuần)"; }
+            }
+
+            const courseTotal = monthlyTotal * 2;
+            
+            totalDisplay.innerText = courseTotal.toLocaleString('vi-VN') + "đ";
+            if (monthlyTotal > 0) {
+                calcLabel.innerHTML = `${label} <br> <span class='text-xs text-yellow-500 font-bold'>(${monthlyTotal.toLocaleString('vi-VN')}đ/tháng x 2 tháng)</span>`;
+            } else {
+                calcLabel.innerText = label;
+            }
+        }
+
+        pitchRadios.forEach(radio => radio.addEventListener('change', updateLogic));
+        checkboxes.forEach(cb => cb.addEventListener('change', () => {
+            let pitchType = "5";
+            pitchRadios.forEach(radio => { if(radio.checked) pitchType = radio.value; });
+            calculateTuition(pitchType);
+        }));
+
+        updateLogic();
+
+        document.getElementById('footballForm').onsubmit = (e) => {
+            e.preventDefault();
+            alert("Đăng ký thành công! Nam Sơn Academy sẽ sớm liên hệ qua Zalo/Số điện thoại để hướng dẫn bé đi tập tại cơ sở đã chọn.");
+        };
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
